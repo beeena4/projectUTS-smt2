@@ -8,9 +8,4 @@ public class ArtificialFlower extends Flower {
         this.material = material;
     }
 
-    @Override
-    public void displayInfo() {
-        System.out.printf("Nama: %s | Harga: Rp %,10.2f | Material: %s%n",
-                getNama(), getHarga(), material);
-    }
 }

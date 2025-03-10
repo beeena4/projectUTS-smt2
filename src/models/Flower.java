@@ -1,6 +1,6 @@
 package models;
 
-abstract class Flower {
+public class Flower {
     private String namaPembeli; // atribut private
     private String nama; // atribut private
     private double harga; // atribut private
@@ -49,7 +49,6 @@ abstract class Flower {
     public void setKategori(String kategori) {
         this.kategori = kategori;
     }
-
-    public abstract void displayInfo();
+   
     
 }

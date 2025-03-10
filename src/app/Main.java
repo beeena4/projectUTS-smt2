@@ -15,6 +15,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         displayJudul(scanner);
 
+        // Menambahkan bunga ke daftar
         listFlowers.add(new FreshFlower("Calla Lily", 10000, "Fresh", 2));
         listFlowers.add(new FreshFlower("Red Rose", 5000, "Fresh", 4));
         listFlowers.add(new FreshFlower("Sun Flower", 10000, "Fresh", 1));
@@ -61,19 +62,17 @@ public class Main {
         System.out.println("| 1. Tampilkan Daftar Bunga           |");
         System.out.println("| 2. Tampilkan Bunga Berdasarkan Harga|");
         System.out.println("| 3. Cari Bunga Berdasarkan Nama      |");
-        System.out.println("| 4. Edit Bunga                       |");
-        System.out.println("| 5. Pesan Bunga                      |");
-        System.out.println("| 6. Keluar                           |");
+        System.out.println("| 4. Keluar                           |");
         System.out.println("=======================================");
-        System.out.print("Pilih menu (1-6): ");
+        System.out.print("Pilih menu (1-4): ");
     }
 
     public static void displayDaftarBunga() {
         System.out.println("\n---------------------------------------");
-        System.out.printf("%-20s | %10s%n", "Nama Bunga", "Harga");
+        System.out.printf("%-20s | %10s | %10s%n", "Nama Bunga", "Harga", "Kategori");
         System.out.println("---------------------------------------");
         for (Flower m : listFlowers) {
-            System.out.printf("%-20s | Rp %,d%n", m.getNama(), (int) m.getHarga());
+            System.out.printf("%-20s | Rp %,d | %10s%n", m.getNama(), (int) m.getHarga(), m.getKategori());
         }
     }
 
@@ -88,7 +87,7 @@ public class Main {
         for (Flower m : listFlowers) {
             if (m.getNama().equalsIgnoreCase(searchName)) {
                 System.out.println("\nBunga ditemukan:");
-                System.out.printf("Nama  : %s%nHarga : Rp %,d%n", m.getNama(), (int) m.getHarga());
+                System.out.printf("Nama  : %s%nHarga : Rp %,d%nKategori: %s%n", m.getNama(), (int) m.getHarga(), m.getKategori());
                 return;
             }
         }
@@ -98,57 +97,4 @@ public class Main {
     public static void displayFooter() {
         System.out.println("\nTerima kasih telah berbelanja!");
     }
-
-
-class Flower {
-    private String namaPembeli; // atribut private
-    private String nama; // atribut private
-    private double harga; // atribut private
-    private String kategori; // atribut private
-    
-
-    // konstruktor
-    public Flower(String nama, double harga, String kategori){
-            this.nama = nama;
-            this.harga = harga;
-            this.kategori = kategori;
-    }
-
-    // metode getter untuk nama pembeli
-    public String getNamaPembeli() {
-        return namaPembeli;
-    }
-    // metode setter untuk nama pembeli
-    public void setNamaPembeli(String namaPembeli) {
-        this.namaPembeli = namaPembeli;
-    }
-    // metode getter untuk nama bunga
-    public String getNama() {
-        return nama;
-    }
-    // metode setter untuk nama bunga
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-    // metode getter untuk harga
-    public double getHarga() {
-        return harga;
-    }
-    // metode setter untuk harga
-    public void setHarga(double harga) {
-        if (harga >= 0) {
-            this.harga = harga;
-        } else {
-            System.out.println("[ERROR] Harga yang dimasukkan tidak valid");
-        }
-    }
-    // metode getter untuk kategori
-    public String getKategori() {
-        return kategori;
-    }
-    // metode setter untuk kategori
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
-    }
-
 }
