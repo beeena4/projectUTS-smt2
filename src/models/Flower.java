@@ -49,6 +49,12 @@ public class Flower {
     public void setKategori(String kategori) {
         this.kategori = kategori;
     }
-   
-    
+
+    // Inner class untuk menyimpan informasi lengkap bunga
+    public class FlowerInfo {
+    public String getFullInfo() {
+        return "Nama: " + nama + " | Harga: Rp " + harga + " | Kategori: " + kategori;
+    }
 }
+}
+   
