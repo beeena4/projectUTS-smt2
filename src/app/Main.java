@@ -50,11 +50,14 @@ public class Main {
 
     public static void displayJudul(Scanner scanner) {
         System.out.println("\n================================================================");
-        System.out.println(">>                          BEE  FLORIST                      <<");
+        System.out.println(">>                       Selamat Datang di                    <<");
+        System.out.println(">                         'BEE FLORIST'                        <");
+        System.out.println(">>    Rangkai bunga terbaik untuk setiap moment spesial ;)    <<");
         System.out.println("================================================================");
         System.out.print("Nama : ");
         String namaPembeli = scanner.nextLine();
-        System.out.println("\nSelamat datang di BEE FLORIST, " + namaPembeli + "!");
+        System.out.println("\nHallo, " + namaPembeli + "!");
+        System.out.println("Kami memiliki beberapa pilihan menu ;)");
     }
 
     public static void displayMenu() {
@@ -201,7 +204,7 @@ public class Main {
                     // menghitung jumlah kembalian
                     double kembalian = pembayaran - totalPembayaran;
                     System.out.printf("KEMBALIAN             : Rp %,10.2f%n", kembalian);
-                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("-----------------------------------------------------------------");
                     ordered = true;
                 }
             }
