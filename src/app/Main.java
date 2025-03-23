@@ -129,7 +129,7 @@ public class Main {
                 System.out.println("----------------------------------------------------------------");
                 System.out.print("Masukkan nama baru    : "); // input nama baru
                 String newName = scanner.nextLine();
-                System.out.print("Masukkan harga baru   : "); // input harga baru
+                System.out.print("Masukkan harga baru   : Rp "); // input harga baru
                 double newPrice = scanner.nextDouble();
                 scanner.nextLine(); 
     
@@ -237,6 +237,10 @@ public class Main {
         }
 
     public static void displayFooter() {
-        System.out.println("\nTerima kasih telah berbelanja!");
+        System.out.println("\n================================================================");
+        System.out.println(">>                TERIMA KASIH ATAS KUNJUNGAN ANDA            <<");
+        System.out.println(">                     by : FEBRIANA NUR AINI                   <");
+        System.out.println(">>                 24111814006 / INFORMATIKA2024A             <<");
+        System.out.println("================================================================");
     }
 }
