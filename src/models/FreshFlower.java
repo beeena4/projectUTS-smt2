@@ -19,6 +19,6 @@ public class FreshFlower extends Flower {
 
     @Override
     public String toString() {
-        return super.toString() + ", Day Fresh: " + dayFresh + " hari";
+        return String.format("%s\n%-12s: %s\n%-12s: %d hari", super.toString(),"Kategori", "Fresh Flower","Day Fresh", dayFresh);
     }
 }

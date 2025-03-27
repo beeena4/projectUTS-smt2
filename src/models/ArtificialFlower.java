@@ -17,4 +17,8 @@ public class ArtificialFlower extends Flower {
         this.material = material;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s\n%-12s: %s\n%-12s: %s",super.toString(),"Kategori", "Artificial Flower","Material", material);
+    }
 }
