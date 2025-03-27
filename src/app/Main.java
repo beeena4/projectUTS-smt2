@@ -50,20 +50,32 @@ public class Main {
     }
 
     public static void displayJudul(Scanner scanner) {
-        System.out.println("\n================================================================");
-        System.out.println("|>>                       Selamat Datang di                  <<|");
-        System.out.println("|>                          'BEE FLORIST'                     <|");
-        System.out.println("|>>   Rangkai bunga terbaik untuk setiap moment spesial! ;)  <<|");
-        System.out.println("================================================================");
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║              << Selamat Datang di BEE Florist >>             ║");
+        System.out.println("║      Rangkai bunga terbaik untuk setiap moment spesial!      ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         System.out.print("Nama : ");
         String namaPembeli = scanner.nextLine();
         System.out.println("\nHallo, " + namaPembeli + "!");
-        System.out.println("Kami memiliki beberapa pilihan menu ;)");
+        System.out.print("Kami memiliki beberapa pilihan menu");
+        loadingEffect(3);  // loading effect
+    }
+
+    public static void loadingEffect(int duration) {
+        try {
+            for (int i = 0; i < duration; i++) {
+                System.out.print(".");
+                Thread.sleep(500); // Delay 500ms per titik
+            }
+            System.out.println(".");
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public static void displayMenu() {
         System.out.println("\n================================================================");
-        System.out.println("||>>                          M E N U                       <<||");
+        System.out.println("||>>                        M  E  N  U                      <<||");
         System.out.println("================================================================");
         System.out.println("| 1. Tampilkan Daftar Bunga                                    |");
         System.out.println("| 2. Tampilkan Bunga Berdasarkan Harga                         |");
@@ -90,11 +102,15 @@ public class Main {
     }
     
     public static void displayDaftarBerdasarHarga() {
+        System.out.print("\nMemproses daftar bunga berdasarkan harga terendah");
+        loadingEffect(3); // loading effect
         listFlowers.sort(Comparator.comparingDouble(Flower::getHarga));
         displayDaftarBunga();
     }
 
     public static void displayBungaBerdasarKategori() {
+        System.out.print("\nMemproses bunga berdasarkan kategori ");
+        loadingEffect(3); // loading effect
         System.out.println("\n================================================================");
         System.out.println(">>              DAFTAR BUNGA BERDASARKAN KATEGORI             <<");
         System.out.println("================================================================");
@@ -127,15 +143,18 @@ public class Main {
         }
         System.out.println("----------------------------------------------------------------");
     }
-    
+
     public static void displayCariBungaBerdasarNama(Scanner scanner) {
         // menu pencarian bunga berdasarkan nama
         System.out.print("\nMasukkan nama bunga yang ingin dicari: ");
         String searchName = scanner.nextLine();
         boolean found = false;
+        
 
         for (Flower m : listFlowers) {
             if (m.getNama().equalsIgnoreCase(searchName)) {
+                System.out.print("Memproses pencarian");
+                loadingEffect(5);  // loading effect
                 // menampilkan informasi bunga yang dicari
                 System.out.println("\nBunga ditemukan:");
                 System.out.println("----------------------------------------------------------------");
@@ -169,6 +188,8 @@ public class Main {
     
                 flower.setNama(newName);
                 flower.setHarga(newPrice);
+                System.out.print("Memperbarui data bunga");
+                loadingEffect(3);  // loading effect
                 System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
                 System.out.println("║              [SUCCES] | Data Berhasil Diperbarui             ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════╝");
@@ -199,6 +220,8 @@ public class Main {
             boolean ordered = false;
             for (Flower m : listFlowers) {
                 if (m.getNama().equalsIgnoreCase(orderName)) {
+                    System.out.print("Memproses pesanan");
+                    loadingEffect(5);  // menambahkan efek loading
                     // membuat objek inner class Order
                     Flower.Order order = m.new Order(jumlah);
                     order.displayOrder(); // menampilkan detail pesanan
@@ -224,7 +247,7 @@ public class Main {
                     // menghitung jumlah kembalian
                     double kembalian = pembayaran - order.getTotalPembayaran();
                     System.out.printf("KEMBALIAN             : Rp %,10.2f%n", kembalian);
-                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("================================================================");
 
                     ordered = true;
                     break;
