@@ -1,11 +1,12 @@
 package models;
 
-public class ArtificialFlower extends Flower {
-    private String material; // atribut private
+public class ArtificialFlower extends Flower { // inheritance
+    private String material; // atribut private untuk menyimpan material bunga
 
+    // konstruktor
     public ArtificialFlower(String nama, double harga, String kategori, String material) {
         super(nama, harga, kategori);
-        this.material = material;
+        this.material = material; // inisialisasi atribut material
     }
 
     // metode getter untuk material
@@ -17,8 +18,9 @@ public class ArtificialFlower extends Flower {
         this.material = material;
     }
 
+    // override toString untuk menampilkan informasi ArtificialFlower
     @Override
     public String toString() {
-        return String.format("%s\n%-12s: %s\n%-12s: %s",super.toString(),"Kategori", "Artificial Flower","Material", material);
+        return String.format("%s\n%-20s: %s\n%-20s: %s",super.toString(),"Kategori", "Artificial Flower","Material", material);
     }
 }

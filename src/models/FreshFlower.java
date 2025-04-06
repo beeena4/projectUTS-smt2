@@ -1,11 +1,12 @@
 package models;
 
-public class FreshFlower extends Flower {
-    private int dayFresh; // atribut private
+public class FreshFlower extends Flower { // inheritance 
+    private int dayFresh; // atribut private untuk menyimpan ketahanan bunga
 
+    // konstruktor
     public FreshFlower(String nama, double harga, String kategori, int dayFresh) {
         super(nama, harga, kategori);
-        this.dayFresh = dayFresh;
+        this.dayFresh = dayFresh; // inisialisasi atribut dayFresh
     }
     // metode getter untuk dayfresh
     public int getDayFresh() {
@@ -17,8 +18,9 @@ public class FreshFlower extends Flower {
         this.dayFresh = dayFresh;
     }
 
+    // override toString untuk menampilkan informasi FreshFlower
     @Override
     public String toString() {
-        return String.format("%s\n%-12s: %s\n%-12s: %d hari", super.toString(),"Kategori", "Fresh Flower","Day Fresh", dayFresh);
+        return String.format("%s\n%-20s: %s\n%-20s: %d hari", super.toString(),"Kategori", "Fresh Flower","Day Fresh", dayFresh);
     }
 }

@@ -40,10 +40,18 @@ public class Main {
                         displayFooter();
                         return;
                     }
-                    default -> System.out.println("\n[ERROR] | Pilihan tidak valid. Silahkan coba lagi.");
+
+                    default -> {
+                        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                        System.out.println("║      [ERROR] | Pilihan tidak valid. Silahkan coba lagi.      ║");
+                        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+                    }
                 }
+
             } catch (InputMismatchException e) {
-                System.out.println("\n[ERROR] | INPUT HARUS ANGKA.");
+                System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                System.out.println("║                [ERROR] | INPUT HARUS ANGKA !!                ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝");
                 scanner.nextLine();
             }
         }
@@ -51,8 +59,10 @@ public class Main {
 
     public static void displayJudul(Scanner scanner) {
         System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-        System.out.println("║              << Selamat Datang di BEE Florist >>             ║");
-        System.out.println("║      Rangkai bunga terbaik untuk setiap moment spesial!      ║");
+        System.out.println("║ +----------------------------------------------------------+ ║");
+        System.out.println("║ | >>         << Selamat Datang di BEE Florist >>        << | ║");
+        System.out.println("║ | >  Rangkai bunga terbaik untuk setiap moment spesial!  < | ║");
+        System.out.println("║ +----------------------------------------------------------+ ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         System.out.print("Nama : ");
         String namaPembeli = scanner.nextLine();
@@ -73,34 +83,37 @@ public class Main {
         }
     }
 
+    // menampilkan menu utama aplikasi
     public static void displayMenu() {
         System.out.println("\n================================================================");
         System.out.println("||>>                        M  E  N  U                      <<||");
-        System.out.println("================================================================");
-        System.out.println("| 1. Tampilkan Daftar Bunga                                    |");
-        System.out.println("| 2. Tampilkan Bunga Berdasarkan Harga                         |");
-        System.out.println("| 3. Tampilkan Bunga Berdasarkan Kategori                      |");
-        System.out.println("| 4. Cari Bunga Berdasarkan Nama                               |");
-        System.out.println("| 5. Edit Bunga                                                |");
-        System.out.println("| 6. Pesan Bunga                                               |");
-        System.out.println("| 7. Keluar                                                    |");
+        System.out.println("+ ============================================================ +");
+        System.out.println("| 1. | Tampilkan Daftar Bunga                                  |");
+        System.out.println("| 2. | Tampilkan Bunga Berdasarkan Harga                       |");
+        System.out.println("| 3. | Tampilkan Bunga Berdasarkan Kategori                    |");
+        System.out.println("| 4. | Cari Bunga Berdasarkan Nama                             |");
+        System.out.println("| 5. | Edit Bunga                                              |");
+        System.out.println("| 6. | Pesan Bunga                                             |");
+        System.out.println("| 7. | Keluar                                                  |");
         System.out.println("================================================================");
         System.out.print("Pilih menu (1-7): ");
     }
 
+    // menampilkan daftar bunga
     public static void displayDaftarBunga() {
         System.out.println("\n----------------------------------------------------------------");
-        System.out.printf("| %-3s | %-20s | %-5s %-10s | %-12s |%n", "No", "Nama Bunga", "Rp", "Harga", "Kategori");
-        System.out.println("----------------------------------------------------------------");
+        System.out.printf("| %-2s | %-20s | %-5s %-10s | %-13s |%n", "No", "Nama Bunga", "Rp", "Harga", "Kategori");
+        System.out.println("---- + -------------------- + ---------------- + ---------------");
         
         int no = 1;
         for (Flower m : listFlowers) {
-            System.out.printf("| %-3d | %-20s | %-5s %,10d | %-12s |%n", no++, m.getNama(), "Rp", (int) m.getHarga(), m.getKategori());
+            System.out.printf("| %-2d | %-20s | %-5s %,10d | %-13s |%n", no++, m.getNama(), "Rp", (int) m.getHarga(), m.getKategori());
         }
     
         System.out.println("----------------------------------------------------------------");
     }
     
+    // menampilkan bunga berdasarkan harga terendah
     public static void displayDaftarBerdasarHarga() {
         System.out.print("\nMemproses daftar bunga berdasarkan harga terendah");
         loadingEffect(3); // loading effect
@@ -108,6 +121,7 @@ public class Main {
         displayDaftarBunga();
     }
 
+    // menampilkan bunga berdasarkan kategori
     public static void displayBungaBerdasarKategori() {
         System.out.print("\nMemproses bunga berdasarkan kategori ");
         loadingEffect(3); // loading effect
@@ -144,106 +158,140 @@ public class Main {
         System.out.println("----------------------------------------------------------------");
     }
 
+    // Pencarian bunga berdasarkan nama
     public static void displayCariBungaBerdasarNama(Scanner scanner) {
-        // menu pencarian bunga berdasarkan nama
-        System.out.print("\nMasukkan nama bunga yang ingin dicari: ");
-        String searchName = scanner.nextLine();
-        boolean found = false;
-        
-
-        for (Flower m : listFlowers) {
-            if (m.getNama().equalsIgnoreCase(searchName)) {
-                System.out.print("Memproses pencarian");
-                loadingEffect(5);  // loading effect
-                // menampilkan informasi bunga yang dicari
-                System.out.println("\nBunga ditemukan:");
-                System.out.println("----------------------------------------------------------------");
-                System.out.println(m.toString()); // memanggil toString() yang sudah di override
-                System.out.println("----------------------------------------------------------------");
-                found = true;
-                break;
+        while (true) {  // Loop agar pengguna bisa mencari bunga berulang kali
+            // Menu pencarian bunga berdasarkan nama
+            System.out.print("\nMasukkan nama bunga yang ingin dicari: ");
+            String searchName = scanner.nextLine();
+            boolean found = false;
+    
+            for (Flower m : listFlowers) {
+                if (m.getNama().equalsIgnoreCase(searchName)) {
+                    System.out.print("Memproses pencarian");
+                    loadingEffect(5);  // loading effect
+    
+                    // Menampilkan informasi bunga yang ditemukan
+                    System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                    System.out.println("║                  <<   Bunga Ditemukan!!!   >>                ║");
+                    System.out.println("╚══════════════════════════════════════════════════════════════╝");
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println(m.toString()); // Memanggil toString() yang sudah di override
+                    System.out.println("----------------------------------------------------------------");
+                    found = true;
+                    break;
+                }
             }
-        }
-        if (!found) {
-            // menampilkan ERROR jika bunga tidak ditemukan
-            System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-            System.out.println("║               [ERROR] | Bunga Tidak Ditemukan!!!             ║");
-            System.out.println("╚══════════════════════════════════════════════════════════════╝");
-        }
-    }
-
-    public static void editBunga(Scanner scanner) {
-        System.out.print("\nMasukkan nama bunga yang ingin diedit: ");
-        String namaBunga = scanner.nextLine();
-        boolean found = false;
     
-        for (Flower flower : listFlowers) {
-            if (flower.getNama().equalsIgnoreCase(namaBunga)) {
-                System.out.println("----------------------------------------------------------------");
-                System.out.print("Masukkan nama baru    : "); // input nama baru
-                String newName = scanner.nextLine();
-                System.out.print("Masukkan harga baru   : Rp "); // input harga baru
-                double newPrice = scanner.nextDouble();
-                scanner.nextLine(); 
-    
-                flower.setNama(newName);
-                flower.setHarga(newPrice);
-                System.out.print("Memperbarui data bunga");
-                loadingEffect(3);  // loading effect
+            if (!found) {
+                // Menampilkan ERROR jika bunga tidak ditemukan
                 System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-                System.out.println("║              [SUCCES] | Data Berhasil Diperbarui             ║");
+                System.out.println("║              [ERROR] | Bunga Tidak Ditemukan !!!             ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════╝");
-                found = true;
-                break;
             }
-        }
     
-        if (!found) {
-            System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-            System.out.println("║               [ERROR] | Bunga Tidak Ditemukan!!!             ║");
-            System.out.println("╚══════════════════════════════════════════════════════════════╝");
-        } else {
-            // menampilkan daftar bunga yang telah diperbarui
-            displayDaftarBunga();
+            // Konfirmasi apakah ingin mencari bunga lagi
+            System.out.print("\nApakah Anda ingin mencari bunga lagi? (Y/N): ");
+            String ulangi = scanner.nextLine().trim().toUpperCase();
+    
+            if (!ulangi.equals("Y")) {
+                break;  // Keluar dari loop jika pengguna tidak ingin mencari lagi
+            }
         }
     }
 
+    // edit bunga
+    public static void editBunga(Scanner scanner) {
+        boolean repeat = true;
+
+        while (repeat) {
+            System.out.print("\nMasukkan nama bunga yang ingin diedit: ");
+            String namaBunga = scanner.nextLine();
+            boolean found = false;
+
+            for (Flower flower : listFlowers) {
+                if (flower.getNama().equalsIgnoreCase(namaBunga)) {
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print("Masukkan nama baru    : ");
+                    String newName = scanner.nextLine();
+                    System.out.print("Masukkan harga baru   : Rp ");
+                    double newPrice = scanner.nextDouble();
+                    scanner.nextLine(); // buang newline
+
+                    flower.setNama(newName);
+                    flower.setHarga(newPrice);
+                    System.out.print("Memperbarui data bunga");
+                    loadingEffect(3);
+                    
+                    System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                    System.out.println("║             [SUCCESS] | Data Berhasil Diperbarui !           ║");
+                    System.out.println("╚══════════════════════════════════════════════════════════════╝");
+                    found = true;
+
+                    // tampilkan daftar bunga terbaru
+                    displayDaftarBunga();
+                    repeat = false; // selesai, keluar dari loop
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                System.out.println("║               [ERROR] | Bunga Tidak Ditemukan!!!             ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝");
+
+                // konfirmasi apakah ingin coba lagi
+                System.out.print("\nApakah Anda ingin mencoba mengedit bunga lain? (Y/N): ");
+                String jawab = scanner.nextLine();
+                if (!jawab.equalsIgnoreCase("Y")) {
+                    repeat = false; // keluar dari loop
+                }
+            }
+        }
+    }
+
+    // memproses dan menampilkan pemesanan bunga
     public static void displayProsesPesanBunga(Scanner scanner) {
         boolean beliLagi;
         do {
             System.out.print("\nMasukkan nama bunga   : "); // input nama bunga yang dipesan
             String orderName = scanner.nextLine();
-            System.out.print("Masukkan jumlah bunga : "); // input jumlah bunga yang dipesan
-            int jumlah = scanner.nextInt();
-            scanner.nextLine();
 
             boolean ordered = false;
             for (Flower m : listFlowers) {
                 if (m.getNama().equalsIgnoreCase(orderName)) {
+                    System.out.print("Masukkan jumlah bunga : "); // input jumlah bunga yang dipesan
+                    int jumlah = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Memproses pesanan");
-                    loadingEffect(5);  // menambahkan efek loading
+                    loadingEffect(5);  // loading effect
+
                     // membuat objek inner class Order
                     Flower.Order order = m.new Order(jumlah);
                     order.displayOrder(); // menampilkan detail pesanan
                     
-                    
-                    // memasukkan pembayaran dari pelanggan
-                    double pembayaran;
-                    while (true) {
+                    double totalPembayaran = order.getTotalPembayaran();
+                    double pembayaran = 0;
+
+                    // Loop pembayaran
+                    while (pembayaran < totalPembayaran) {
                         System.out.print("TUNAI                 : Rp ");
-                        pembayaran = scanner.nextDouble();
+                        double tambahan = scanner.nextDouble();
                         scanner.nextLine();
-                        if (pembayaran >= order.getTotalPembayaran()) {
-                            break;
-                        } else {
-                            double kekurangan = order.getTotalPembayaran() - pembayaran;
+                        
+                        pembayaran += tambahan;
+
+                        // Jika uang pembayaran kurang
+                        if (pembayaran < totalPembayaran) {
+                            double kekurangan = totalPembayaran - pembayaran;
                             System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-                            System.out.println("║            [ERROR] | Uang Pembayaran Tidak Cukup!!.          ║");
+                            System.out.println("║            [ INFO ] Uang Pembayaran Tidak Cukup!!            ║");
+                            System.out.println("║                Silahkan Melanjutkan Pembayaran               ║");
                             System.out.println("╚══════════════════════════════════════════════════════════════╝");
                             System.out.printf("\nKEKURANGAN            : Rp %,10.2f%n", kekurangan);
                         }
                     }
-
                     // menghitung jumlah kembalian
                     double kembalian = pembayaran - order.getTotalPembayaran();
                     System.out.printf("KEMBALIAN             : Rp %,10.2f%n", kembalian);
@@ -269,21 +317,29 @@ public class Main {
                     beliLagi = true;
                     break;
                 } else if (pilihanLagi.equals("N")) {
-                    System.out.println("\nTerima kasih telah berbelanja!!");
-                    System.out.println("Selamat menikmati moment spesial Anda!");
+                    System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                    System.out.println("║             << Terima kasih telah berbelanja!! >>            ║");
+                    System.out.println("║         << Selamat menikmati momment spesial Anda! >>        ║");
+                    System.out.println("╚══════════════════════════════════════════════════════════════╝");
                     return;
                 } else {
-                    System.out.print("Input tidak valid! Masukkan (Y/N): ");
+                    System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+                    System.out.println("║                          [ E R R O R ]                       ║");
+                    System.out.println("╚══════════════════════════════════════════════════════════════╝");
+                    System.out.print("\nInput tidak valid! Masukan (Y/N): ");
                 }
             }
         } while (beliLagi);
     }
 
+    // menampilkan footer
     public static void displayFooter() {
-        System.out.println("\n================================================================");
-        System.out.println(">>               TERIMA KASIH ATAS KUNJUNGAN ANDA             <<");
-        System.out.println(">                     by : FEBRIANA NUR AINI                   <");
-        System.out.println(">>                24111814006 / INFORMATIKA2024A              <<");
-        System.out.println("================================================================");
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║ +----------------------------------------------------------+ ║");
+        System.out.println("║ |>>            TERIMA KASIH ATAS KUNJUNGAN ANDA          <<| ║");
+        System.out.println("║ |>                  by : FEBRIANA NUR AINI                <| ║");
+        System.out.println("║ |>>             24111814006 / INFORMATIKA2024A           <<| ║");
+        System.out.println("║ +----------------------------------------------------------+ ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
     }
 }
