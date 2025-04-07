@@ -99,7 +99,7 @@ public class Main {
         System.out.print("Pilih menu (1-7): ");
     }
 
-    // menampilkan daftar bunga
+    // menampilkan daftar bunga-
     public static void displayDaftarBunga() {
         System.out.println("\n----------------------------------------------------------------");
         System.out.printf("| %-2s | %-20s | %-5s %-10s | %-13s |%n", "No", "Nama Bunga", "Rp", "Harga", "Kategori");
